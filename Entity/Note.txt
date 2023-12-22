@@ -1,0 +1,5 @@
+﻿add-migration -context DatabaseContext update22
+
+update-database -context DatabaseContext update22
+
+Scaffold-DbContext "Server=34.67.81.226;Database=Car_Service_Dev;user id=sa;password=Pass@word1" Microsoft.EntityFrameworkCore.SqlServer -OzA 6 6R4utputDir Model -Context "ApplicationContext" -DataAnnotations

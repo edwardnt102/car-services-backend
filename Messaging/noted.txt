@@ -1,0 +1,16 @@
+﻿1. Tài khoản xem báo cáo, WebTool:
+                  - link: https://partner.sms.fpt.net/
+                  - user:   tps.software.vn
+                  - mật khẩu: faRTgsWyq4djjgedKsyJ82Bk
+                  - Tài liệu hướng dẫn dử dụng: https://partner.sms.fpt.net/downloads/UserGuide-Partner.pdf
+
+      2. Tài khoản trang developer (Tích hợp API):
+                  - link: https://developer.sms.fpt.net/my-app
+                  - user:   tps.software.vn
+                  - mật khẩu: faRTgsWyq4djjgedKsyJ82Bk
+
+      3. Tài liệu tích hợp API gửi tin brandname:
+                  - https://developer.sms.fpt.net/downloads/tai-lieu-tich-hop-brandname.pdf
+                  - https://developer.sms.fpt.net/document/brandname
+                  - Brandname sử dụng:   FTI
+                  - Hạn mức: 30

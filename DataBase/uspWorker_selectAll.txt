@@ -1,0 +1,39 @@
+ ALTER PROCEDURE [dbo].[uspWorker_selectAll]
+    (
+	    @key NVARCHAR(100)
+    )
+    AS
+    BEGIN
+        SET NOCOUNT ON;
+        DECLARE
+            @strErrorMessage NVARCHAR(4000),
+            @intErrorSeverity INT,
+            @intErrorState INT,
+            @intErrorLine INT;
+
+        BEGIN TRY
+		    IF @key = 'all'
+		    BEGIN
+			    SELECT * FROM [dbo].[Worker]
+		    END
+		    ELSE
+		    BEGIN
+			    SELECT * FROM [dbo].[Worker] a where a.Name_with_type like N'%'+@key+'%'
+		    END
+        
+        
+        END TRY
+        BEGIN CATCH
+            SELECT
+                @strErrorMessage = ERROR_MESSAGE()
+                        + ' Line:'
+                        + CONVERT(VARCHAR(5), ERROR_LINE()),
+                @intErrorSeverity = ERROR_SEVERITY(),
+                @intErrorState = ERROR_STATE();
+            RAISERROR(
+                    @strErrorMessage,   -- Message text.
+                    @intErrorSeverity,  -- Severity.
+                    @intErrorState      -- State.
+            );
+        END CATCH;
+    END

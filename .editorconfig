@@ -1,0 +1,10 @@
+﻿[*.cs]
+
+# CS0693: Type parameter has the same name as the type parameter from outer type
+dotnet_diagnostic.CS0693.severity = none
+
+# CS0618: Type or member is obsolete
+dotnet_diagnostic.CS0618.severity = none
+
+# ASP0000: Do not call 'IServiceCollection.BuildServiceProvider' in 'ConfigureServices'
+dotnet_diagnostic.ASP0000.severity = none

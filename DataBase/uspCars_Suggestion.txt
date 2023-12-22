@@ -1,0 +1,45 @@
+
+/****** Object:  StoredProcedure [dbo].[uspCars_Suggestion]    Script Date: 4/24/2021 9:42:20 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+    ALTER PROCEDURE [dbo].[uspCars_Suggestion]
+    (
+	    @key NVARCHAR(100)
+    )
+    AS
+    BEGIN
+        SET NOCOUNT ON;
+        DECLARE
+            @strErrorMessage NVARCHAR(4000),
+            @intErrorSeverity INT,
+            @intErrorState INT,
+            @intErrorLine INT;
+
+        BEGIN TRY
+    
+            SELECT Id, Title AS [Value] 
+			FROM [dbo].Cars
+			WHERE ISNULL(IsDeleted,0) = 0
+				  AND (@key IS NULL OR (dbo.ufnRemoveMark(LicensePlates) LIKE N'%' + dbo.ufnRemoveMark(@key) + '%'))
+			ORDER BY Title ASC;
+
+        END TRY
+        BEGIN CATCH
+            SELECT
+                @strErrorMessage = ERROR_MESSAGE()
+                        + ' Line:'
+                        + CONVERT(VARCHAR(5), ERROR_LINE()),
+                @intErrorSeverity = ERROR_SEVERITY(),
+                @intErrorState = ERROR_STATE();
+            RAISERROR(
+                    @strErrorMessage,   -- Message text.
+                    @intErrorSeverity,  -- Severity.
+                    @intErrorState      -- State.
+            );
+        END CATCH;
+    END
+
+
+

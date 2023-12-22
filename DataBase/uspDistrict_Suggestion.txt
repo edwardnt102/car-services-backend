@@ -1,0 +1,52 @@
+
+/****** Object:  StoredProcedure [dbo].[uspDistrict_Suggestion]    Script Date: 4/16/2021 12:36:35 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+ 
+    -- =================================================================
+    -- Author: MSSQL-Dapper Generator
+    -- Description:	Select All Procedure for the table [dbo].[District] 
+    -- =================================================================
+
+    ALTER PROCEDURE [dbo].[uspDistrict_Suggestion]
+    (
+	    @key NVARCHAR(100),
+		@provinceId BIGINT
+    )
+    AS
+    BEGIN
+        SET NOCOUNT ON;
+        DECLARE
+            @strErrorMessage NVARCHAR(4000),
+            @intErrorSeverity INT,
+            @intErrorState INT,
+            @intErrorLine INT;
+
+        BEGIN TRY
+    
+            SELECT DistrictCode as Id, ([Prefix] + [Name]) as Value FROM [dbo].[District] a where a.[Name] like N'%'+@key+'%' and a.ProvinceId = @provinceId
+            ORDER BY [Name] ASC;
+        END TRY
+        BEGIN CATCH
+            SELECT
+                @strErrorMessage = ERROR_MESSAGE()
+                        + ' Line:'
+                        + CONVERT(VARCHAR(5), ERROR_LINE()),
+                @intErrorSeverity = ERROR_SEVERITY(),
+                @intErrorState = ERROR_STATE();
+            RAISERROR(
+                    @strErrorMessage,   -- Message text.
+                    @intErrorSeverity,  -- Severity.
+                    @intErrorState      -- State.
+            );
+        END CATCH;
+    END
+
+
+

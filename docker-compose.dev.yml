@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+   dukebluedevils:
+    hostname: localhost
+    container_name: car-service
+    image: hunghvhpu/car-service:${VERSION}
+    ports:
+      - 8081:80
+      - 587:587
+    restart: always
+    volumes:
+      - /wwwroot/upload:/app/wwwroot/upload
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
